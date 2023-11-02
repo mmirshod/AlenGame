@@ -1,5 +1,3 @@
-DROP SCHEMA public CASCADE;
-
 CREATE TABLE users (
     id uuid,
     name VARCHAR(255) NOT NULL,
@@ -18,20 +16,20 @@ CREATE TABLE person (
     PRIMARY KEY (id)
 );
 
-CREATE TABLE results (
-    id uuid primary key ,
-    quiz_id uuid,
-    played_time timestamp ,
-    score int CHECK ( score between 0 and 10),
-    CONSTRAINT fk_quiz FOREIGN KEY (quiz_id) REFERENCES quiz(id)
-);
-
 CREATE TABLE quiz (
     id uuid primary key,
     quiz_number SMALLSERIAL,
     max_score int,
     last_played timestamp,
     times_played int DEFAULT 0
+);
+
+CREATE TABLE results (
+                         id uuid primary key ,
+                         quiz_id uuid,
+                         played_time timestamp ,
+                         score int CHECK ( score between 0 and 10),
+                         CONSTRAINT fk_quiz FOREIGN KEY (quiz_id) REFERENCES quiz(id)
 );
 
 CREATE OR REPLACE FUNCTION update_times_played_func()

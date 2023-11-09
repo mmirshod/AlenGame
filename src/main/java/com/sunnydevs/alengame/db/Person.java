@@ -4,6 +4,7 @@ import java.sql.Blob;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.Objects;
 
 public final class Person extends GetConnection {
@@ -11,25 +12,25 @@ public final class Person extends GetConnection {
     private final String name;
     private final int age;
     private final Blob photo;
-    private final Blob voice;
     private final String memo;
+    private final int groupId;
 
-    private Person(int id, String name, int age, Blob photo, Blob voice, String memo) {
+    private Person(int id, String name, int age, Blob photo, String memo, int groupId) {
         this.id = id;
         this.name = name;
         this.age = age;
         this.photo = photo;
-        this.voice = voice;
         this.memo = memo;
+        this.groupId = groupId;
     }
 
-    public static void _new(Person personSchema) throws SQLException {
-        PreparedStatement preparedStatement = conn.prepareStatement("INSERT INTO person (name, age, photo, voice, memo) VALUES (?, ?, ?, ?, ?)");
-        preparedStatement.setString(1, personSchema.name());
-        preparedStatement.setInt(2, personSchema.age());
-        preparedStatement.setBlob(3, personSchema.photo());
-        preparedStatement.setBlob(4, personSchema.voice());
-        preparedStatement.setString(5, personSchema.memo());
+    public static void _new(String name, int age, Blob photo, Blob voice, String memo, int groupId) throws SQLException {
+        PreparedStatement preparedStatement = conn.prepareStatement("INSERT INTO person (name, age, photo, memo, group_id) VALUES (?, ?, ?, ?, ?)");
+        preparedStatement.setString(1, name);
+        preparedStatement.setInt(2, age);
+        preparedStatement.setBlob(3, photo);
+        preparedStatement.setString(4, memo);
+        preparedStatement.setInt(5, groupId);
         preparedStatement.executeUpdate();
         preparedStatement.close();
     }
@@ -54,14 +55,34 @@ public final class Person extends GetConnection {
         return _getFromResultSet(res);
     }
 
+    static public ArrayList<Person> all() throws SQLException {
+        PreparedStatement preparedStatement = conn.prepareStatement("SELECT * FROM person ORDER BY id");
+        ResultSet res = preparedStatement.executeQuery();
+        ArrayList<Person> allPeople = new ArrayList<>();
+
+        while(res.next()) {
+            allPeople.add(_getFromResultSet(res));
+        }
+
+        return allPeople;
+    }
+
+    public static ArrayList<String> allNames() throws SQLException {
+        ArrayList<String> allNames = new ArrayList<>();
+        for (Person p : Person.all())
+            allNames.add(p.name);
+
+        return allNames;
+    }
+
     static Person _getFromResultSet(ResultSet res) throws SQLException {
         return new Person(
             res.getInt("id"),
             res.getString("name"),
             res.getInt("age"),
             res.getBlob("photo"),
-            res.getBlob("voice"),
-            res.getString("memo")
+            res.getString("memo"),
+            res.getInt("group_id")
         );
     }
 
@@ -81,12 +102,12 @@ public final class Person extends GetConnection {
         return photo;
     }
 
-    public Blob voice() {
-        return voice;
-    }
-
     public String memo() {
         return memo;
+    }
+
+    public int groupId() {
+        return groupId;
     }
 
     @Override
@@ -98,13 +119,12 @@ public final class Person extends GetConnection {
                 Objects.equals(this.name, that.name) &&
                 this.age == that.age &&
                 Objects.equals(this.photo, that.photo) &&
-                Objects.equals(this.voice, that.voice) &&
                 Objects.equals(this.memo, that.memo);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, name, age, photo, voice, memo);
+        return Objects.hash(id, name, age, photo, memo);
     }
 
     @Override
@@ -114,7 +134,6 @@ public final class Person extends GetConnection {
                 "name=" + name + ", " +
                 "age=" + age + ", " +
                 "photo=" + photo + ", " +
-                "voice=" + voice + ", " +
                 "memo=" + memo + ']';
     }
 

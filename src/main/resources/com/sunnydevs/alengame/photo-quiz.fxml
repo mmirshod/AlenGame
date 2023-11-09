@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<!--<AnchorPane prefHeight="518.0" prefWidth="809.0" style="-fx-background-color: linear-gradient(to bottom right, #a000c2, #452b7c);" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.sunnydevs.alengame.PhotoQuizController">-->
+<!--   <children>-->
+<!--      <Label fx:id="questionNum" alignment="TOP_CENTER" prefWidth="14.0" text="#1" />-->
+<!--      <ImageView fx:id="imgHolder" cache="true" fitHeight="219.0" fitWidth="468.0" layoutX="171.0" layoutY="119.0" pickOnBounds="true" preserveRatio="true" />-->
+<!--   </children>-->
+<!--</AnchorPane>-->
+
+<BorderPane style="-fx-background-color: linear-gradient(to bottom right, #a000c2, #452b7c); -fx-pref-height: 650; -fx-pref-width: 1000;" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.sunnydevs.alengame.PhotoQuizController">
+   <top>
+      <Label fx:id="questionNum" alignment="TOP_CENTER" prefHeight="50.0" prefWidth="478.0" text="#1" textFill="#ff00a2" BorderPane.alignment="CENTER">
+         <BorderPane.margin>
+            <Insets />
+         </BorderPane.margin>
+         <font>
+            <Font name="Comic Sans MS" size="39.0" />
+         </font>
+      </Label>
+   </top>
+   <center>
+      <VBox alignment="TOP_CENTER" prefHeight="534.0" prefWidth="899.0">
+         <Label alignment="CENTER" nodeOrientation="LEFT_TO_RIGHT" prefHeight="54.0" prefWidth="595.0" text="Select correct option" textAlignment="CENTER" textFill="#d1d1d1" textOverrun="CLIP" BorderPane.alignment="TOP_CENTER">
+            <VBox.margin>
+               <Insets bottom="15.0" left="15.0" right="15.0" />
+            </VBox.margin>
+            <font>
+               <Font name="Britannic Bold" size="48.0" />
+            </font></Label>
+         <ImageView fx:id="imgHolder" fitHeight="300.0" fitWidth="650.0" pickOnBounds="true" preserveRatio="true">
+            <image>
+               <Image url="@Screenshot%202023-10-22%20114144.png" />
+            </image></ImageView>
+         <GridPane fx:id="btnsContainer" alignment="CENTER" nodeOrientation="LEFT_TO_RIGHT" prefHeight="168.0" prefWidth="650.0">
+           <columnConstraints>
+             <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+             <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+           </columnConstraints>
+           <rowConstraints>
+             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+           </rowConstraints>
+            <children>
+               <Button fx:id="opt2" mnemonicParsing="false" onAction="#nextQuestion" prefHeight="48.0" prefWidth="194.0" text="Option2" GridPane.columnIndex="1" />
+               <Button fx:id="opt3" mnemonicParsing="false" onAction="#nextQuestion" prefHeight="50.0" prefWidth="219.0" text="Option3" GridPane.rowIndex="1" />
+               <Button fx:id="opt4" mnemonicParsing="false" onAction="#nextQuestion" prefHeight="51.0" prefWidth="195.0" text="Option4" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+               <Button fx:id="opt1" mnemonicParsing="false" onAction="#nextQuestion" prefHeight="49.0" prefWidth="212.0" text="Option1" />
+            </children>
+         </GridPane>
+      </VBox>
+   </center>
+   <right>
+      <Pane prefWidth="150.0" BorderPane.alignment="CENTER" />
+   </right>
+   <left>
+      <Pane prefHeight="200.0" prefWidth="150.0" BorderPane.alignment="CENTER" />
+   </left>
+   <bottom>
+      <Pane prefHeight="50.0" prefWidth="200.0" BorderPane.alignment="CENTER" />
+   </bottom>
+</BorderPane>

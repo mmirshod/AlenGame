@@ -23,7 +23,7 @@ public class HomeController {
                     Stage thisStage = (Stage) ((Button) actionEvent.getSource()).getScene().getWindow();
                     thisStage.close();
 
-                    FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("hello-view.fxml"));
+                    FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("photo-quiz.fxml"));
                     Scene scene = new Scene(fxmlLoader.load());
                     Stage stage = new Stage();
                     stage.setScene(scene);

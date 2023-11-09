@@ -8,12 +8,13 @@ import java.util.Objects;
 
 public final class Result extends GetConnection {
     private final int id;
-    private final int quizId;
+    private final int groupId;
     private final Timestamp playedTime;
     private final int score;
+    private final String quizType;
 
-    public static void _new(int quizId, int score) throws SQLException {
-        PreparedStatement preparedStatement = conn.prepareStatement("INSERT INTO results (quiz_id, played_time, score) VALUES (%d, current_timestamp, %d)".formatted(quizId, score));
+    public static void _new(int groupId, int score, String quizType) throws SQLException {
+        PreparedStatement preparedStatement = conn.prepareStatement("INSERT INTO results (group_id, played_time, score, quiz_type) VALUES (%d, current_timestamp, %d, %s)".formatted(groupId, score, quizType));
         preparedStatement.executeUpdate();
         preparedStatement.close();
     }
@@ -28,25 +29,27 @@ public final class Result extends GetConnection {
     static Result _getFromResultSet(ResultSet res) throws SQLException {
         return new Result(
             res.getInt("id"),
-            res.getInt("quiz_id"),
+            res.getInt("group_id"),
             res.getTimestamp("played_time"),
-            res.getInt("score")
+            res.getInt("score"),
+            res.getString("quiz_type")
         );
     }
 
-    private Result(int id, int quizId, Timestamp playedTime, int score) {
+    private Result(int id, int groupId, Timestamp playedTime, int score, String quizType) {
         this.id = id;
-        this.quizId = quizId;
+        this.groupId = groupId;
         this.playedTime = playedTime;
         this.score = score;
+        this.quizType = quizType;
     }
 
     public int id() {
         return id;
     }
 
-    public int quizId() {
-        return quizId;
+    public int groupId() {
+        return groupId;
     }
 
     public Timestamp playedTime() {
@@ -57,27 +60,31 @@ public final class Result extends GetConnection {
         return score;
     }
 
+    public String quizType() {
+        return quizType;
+    }
+
     @Override
     public boolean equals(Object obj) {
         if (obj == this) return true;
         if (obj == null || obj.getClass() != this.getClass()) return false;
         var that = (Result) obj;
         return this.id == that.id &&
-                this.quizId == that.quizId &&
+                this.groupId == that.groupId &&
                 Objects.equals(this.playedTime, that.playedTime) &&
                 this.score == that.score;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, quizId, playedTime, score);
+        return Objects.hash(id, groupId, playedTime, score);
     }
 
     @Override
     public String toString() {
         return "Result[" +
                 "id=" + id + ", " +
-                "quizId=" + quizId + ", " +
+                "groupId=" + groupId + ", " +
                 "playedTime=" + playedTime + ", " +
                 "score=" + score + ']';
     }

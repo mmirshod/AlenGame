@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
@@ -22,8 +23,13 @@
                </font>
             </Label>
             <Button fx:id="settingsBtn" mnemonicParsing="false" prefHeight="39.0" prefWidth="271.0" text="Settings" GridPane.rowIndex="2" />
-            <Button fx:id="playBtn" alignment="CENTER" contentDisplay="CENTER" defaultButton="true" mnemonicParsing="false" prefHeight="38.0" prefWidth="299.0" text="Play" textAlignment="CENTER" GridPane.rowIndex="1">
-            </Button>
+            <Button fx:id="playBtn" alignment="CENTER" contentDisplay="CENTER" defaultButton="true" mnemonicParsing="false" prefHeight="38.0" prefWidth="299.0" text="Play" textAlignment="CENTER" textFill="#3e3e40" GridPane.rowIndex="1">
+               <font>
+                  <Font name="Franklin Gothic Demi" size="26.0" />
+               </font>
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets></Button>
          </children>
       </GridPane>
    </children>

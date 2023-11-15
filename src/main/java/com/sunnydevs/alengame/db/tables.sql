@@ -3,14 +3,14 @@ CREATE SCHEMA public;
 
 CREATE TABLE groups (
     id SERIAL PRIMARY KEY ,
-    type VARCHAR(255) NOT NULL ,
+    type VARCHAR(255) NOT NULL UNIQUE ,
     max_score int DEFAULT 0
 );
 
 CREATE TABLE person (
     id SERIAL,
     group_id int DEFAULT 1,
-    name VARCHAR(255) NOT NULL,
+    name VARCHAR(255) NOT NULL UNIQUE ,
     age INT NOT NULL,
     photo bytea NOT NULL,
     memo TEXT NOT NULL,

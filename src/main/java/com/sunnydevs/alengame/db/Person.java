@@ -48,6 +48,14 @@ public final class Person extends GetConnection {
         return _getFromResultSet(res);
     }
 
+    public static Person getByName(String name) throws SQLException {
+        PreparedStatement statement = conn.prepareStatement("SELECT * FROM person WHERE name=?");
+        statement.setString(1, name);
+        ResultSet res = statement.executeQuery();
+        statement.close();
+        return _getFromResultSet(res);
+    }
+
     public static Person first() throws SQLException {
         PreparedStatement preparedStatement = conn.prepareStatement("SELECT * FROM person ORDER BY id LIMIT 1");
         ResultSet res = preparedStatement.executeQuery();

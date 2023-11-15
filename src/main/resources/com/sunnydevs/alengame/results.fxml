@@ -6,7 +6,7 @@
 <?import javafx.scene.text.*?>
 
 
-<AnchorPane prefHeight="400.0" prefWidth="684.0" xmlns="http://javafx.com/javafx/11.0.14-internal" style="-fx-background-color: white; -fx-background-radius: 32px; -fx-border-radius: 32px;" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.easyquiz.ResultController">
+<AnchorPane prefHeight="400.0" prefWidth="684.0" xmlns="http://javafx.com/javafx/11.0.14-internal" style="-fx-background-color: white; -fx-background-radius: 32px; -fx-border-radius: 32px;" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.sunnydevs.alengame.ResultsController">
     <children>
         <Label layoutX="298.0" layoutY="42.0" text="Result">
             <font>

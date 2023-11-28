@@ -1,10 +1,8 @@
 package com.sunnydevs.alengame.db;
 
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Timestamp;
+import java.sql.*;
 import java.util.Objects;
+import java.util.Arrays;
 
 public final class Result extends GetConnection {
     private final int id;
@@ -12,9 +10,15 @@ public final class Result extends GetConnection {
     private final Timestamp playedTime;
     private final int score;
     private final String quizType;
+    private final int userId;
 
-    public static void _new(int groupId, int score, String quizType) throws SQLException {
-        PreparedStatement preparedStatement = conn.prepareStatement("INSERT INTO results (group_id, played_time, score, quiz_type) VALUES (%d, current_timestamp, %d, %s)".formatted(groupId, score, quizType));
+    public static void _new(int groupId, int userId, int score, String quizType, int[] people) throws SQLException {
+        PreparedStatement preparedStatement = conn.prepareStatement("INSERT INTO results (group_id, played_time, score, quiz_type, people, user_id) VALUES (?, current_timestamp, ?, ?, ?, ?)");
+        preparedStatement.setInt(1, groupId);
+        preparedStatement.setInt(2, score);
+        preparedStatement.setString(3, quizType);
+        Object[] values = Arrays.stream(people).boxed().toArray();
+        preparedStatement.setArray(4, conn.createArrayOf("int", values));
         preparedStatement.executeUpdate();
         preparedStatement.close();
     }
@@ -27,21 +31,26 @@ public final class Result extends GetConnection {
     }
 
     static Result _getFromResultSet(ResultSet res) throws SQLException {
-        return new Result(
-            res.getInt("id"),
-            res.getInt("group_id"),
-            res.getTimestamp("played_time"),
-            res.getInt("score"),
-            res.getString("quiz_type")
-        );
+        if (res.next()) {
+            return new Result(
+                    res.getInt("id"),
+                    res.getInt("group_id"),
+                    res.getTimestamp("played_time"),
+                    res.getInt("score"),
+                    res.getString("quiz_type"),
+                    res.getInt("user_id")
+            );
+        }
+        throw new RuntimeException();
     }
 
-    private Result(int id, int groupId, Timestamp playedTime, int score, String quizType) {
+    private Result(int id, int groupId, Timestamp playedTime, int score, String quizType, int userId) {
         this.id = id;
         this.groupId = groupId;
         this.playedTime = playedTime;
         this.score = score;
         this.quizType = quizType;
+        this.userId = userId;
     }
 
     public int id() {
@@ -62,6 +71,10 @@ public final class Result extends GetConnection {
 
     public String quizType() {
         return quizType;
+    }
+
+    public int userId() {
+        return userId;
     }
 
     @Override

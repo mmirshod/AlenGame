@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane prefHeight="400.0" prefWidth="700.0" style="-fx-background-color: #2E3348;" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.sunnydevs.alengame.AddPeople">
+   <children>
+      <AnchorPane layoutY="93.0" prefHeight="306.0" prefWidth="700.0" style="-fx-background-color: #fcfafa;">
+         <children>
+            <ImageView fitHeight="150.0" fitWidth="148.0" layoutX="49.0" layoutY="52.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../../../../Images/4211763.png" />
+               </image></ImageView>
+            <TextField layoutX="227.0" layoutY="39.0" prefHeight="39.0" prefWidth="370.0" promptText="Name">
+               <font>
+                  <Font size="17.0" />
+               </font></TextField>
+            <TextField layoutX="227.0" layoutY="96.0" prefHeight="39.0" prefWidth="370.0" promptText="Date of birth">
+               <font>
+                  <Font size="17.0" />
+               </font></TextField>
+            <TextField layoutX="227.0" layoutY="153.0" prefHeight="39.0" prefWidth="370.0" promptText="Quote">
+               <font>
+                  <Font size="17.0" />
+               </font></TextField>
+            <Button layoutX="372.0" layoutY="216.0" mnemonicParsing="false" prefHeight="39.0" prefWidth="93.0" style="-fx-background-color: #F98344;" text="Add" textFill="#fcfafa">
+               <font>
+                  <Font size="17.0" />
+               </font>
+            </Button>
+         </children></AnchorPane>
+      <Label layoutX="255.0" layoutY="14.0" text="New Person" textFill="#fcfafa">
+         <font>
+            <Font size="36.0" />
+         </font>
+      </Label>
+   </children>
+</AnchorPane>

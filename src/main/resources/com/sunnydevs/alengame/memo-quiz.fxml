@@ -1,74 +1,52 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<BorderPane style="-fx-background-color: linear-gradient(to bottom right, #a000c2, #452b7c); -fx-pref-height: 650; -fx-pref-width: 1000;" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.sunnydevs.alengame.MemoQuizController">
-    <center>
-      <VBox alignment="TOP_CENTER" BorderPane.alignment="CENTER">
-         <BorderPane.margin>
-            <Insets top="15.0" />
-         </BorderPane.margin>
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="700.0" style="-fx-background-color: #fdcd1e;" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <AnchorPane layoutX="128.0" layoutY="51.0" prefHeight="297.0" prefWidth="443.0" style="-fx-background-color: #f6f7fb; -fx-background-radius: 30;">
          <children>
-              <Label fx:id="questionNum" text="#1" textAlignment="CENTER">
-                  <font>
-                      <Font name="Comic Sans MS Bold" size="40.0" />
-                  </font>
-              </Label>
-            <Label text="Select correct option">
+            <AnchorPane layoutY="56.0" prefHeight="241.0" prefWidth="438.0" style="-fx-background-color: #ffffff; -fx-background-radius: 30;">
+               <children>
+                  <AnchorPane layoutY="-7.0" prefHeight="211.0" prefWidth="443.0" style="-fx-background-color: #ffffff;">
+                     <children>
+                        <Label fx:id="mem0_quiz_quote" layoutX="93.0" layoutY="34.0" text="Multiply yourself to">
+                           <font>
+                              <Font size="30.0" />
+                           </font>
+                        </Label>
+                        <Button fx:id="memo_quiz_first_variant" layoutX="35.0" layoutY="105.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="174.0" style="-fx-background-color: #ffffff; -fx-border-color: #808080;" text="Mirshod">
+                           <font>
+                              <Font size="15.0" />
+                           </font>
+                        </Button>
+                        <Button fx:id="memo_quiz_second_variant" layoutX="224.0" layoutY="105.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="174.0" style="-fx-background-color: #ffffff; -fx-border-color: #808080;" text="Maxmud">
+                           <font>
+                              <Font size="15.0" />
+                           </font>
+                        </Button>
+                        <Button fx:id="memo_quiz_third_variant" layoutX="35.0" layoutY="163.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="174.0" style="-fx-background-color: #dffbef; -fx-border-color: #2ca177;" text="Abbos">
+                           <font>
+                              <Font size="15.0" />
+                           </font>
+                        </Button>
+                        <Button fx:id="memo_quiz_fourth_variant" layoutX="224.0" layoutY="163.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="174.0" style="-fx-background-color: #ffffff; -fx-border-color: #808080;" text="Sarvar">
+                           <font>
+                              <Font size="15.0" />
+                           </font>
+                        </Button>
+                     </children>
+                  </AnchorPane>
+               </children>
+            </AnchorPane>
+            <Label fx:id="memo_quiz_instruction" layoutX="144.0" layoutY="14.0" text="Select correct option">
                <font>
-                  <Font name="Britannic Bold" size="40.0" />
+                  <Font name="System Bold" size="17.0" />
                </font>
             </Label>
-            <Pane prefHeight="290.0" prefWidth="699.0">
-               <children>
-                  <Label fx:id="memoHolder" alignment="CENTER" graphicTextGap="2.0" prefHeight="201.0" prefWidth="701.0" text="Multiply yourself to matrix..." textAlignment="CENTER" textFill="#ff9405" textOverrun="CLIP">
-                     <font>
-                        <Font name="Chiller" size="75.0" />
-                     </font>
-                  </Label>
-               </children>
-            </Pane>
-            <GridPane fx:id="btnsContainer" prefHeight="131.0" prefWidth="699.0">
-              <columnConstraints>
-                <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-              </columnConstraints>
-              <rowConstraints>
-                <RowConstraints minHeight="10.0" prefHeight="30.0" valignment="CENTER" vgrow="SOMETIMES" />
-                <RowConstraints minHeight="10.0" prefHeight="30.0" valignment="CENTER" vgrow="SOMETIMES" />
-              </rowConstraints>
-               <children>
-                  <Button fx:id="btn1" mnemonicParsing="false" onAction="#nextQuestion" prefHeight="37.0" prefWidth="190.0" text="Button" />
-                  <Button fx:id="btn2" mnemonicParsing="false" onAction="#nextQuestion" prefHeight="38.0" prefWidth="188.0" text="Button" GridPane.columnIndex="1" />
-                  <Button fx:id="btn3" mnemonicParsing="false" onAction="#nextQuestion" prefHeight="34.0" prefWidth="192.0" text="Button" GridPane.rowIndex="1" />
-                  <Button fx:id="btn4" mnemonicParsing="false" onAction="#nextQuestion" prefHeight="36.0" prefWidth="188.0" text="Button" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-               </children>
-            </GridPane>
          </children>
-      </VBox>
-    </center>
-    <right>
-        <Pane prefWidth="150.0" BorderPane.alignment="CENTER" />
-    </right>
-    <left>
-        <Pane prefHeight="200.0" prefWidth="150.0" BorderPane.alignment="CENTER" />
-    </left>
-    <bottom>
-        <Pane prefHeight="50.0" prefWidth="200.0" BorderPane.alignment="CENTER" />
-    </bottom>
-   <top>
-      <ButtonBar buttonMinWidth="20.0" style="-fx-border-radius: 25;" BorderPane.alignment="CENTER">
-         <buttons>
-            <Button minWidth="22.0" mnemonicParsing="false" prefHeight="27.0" style="-fx-border-radius: 100; -fx-border-color: red;" text="_" />
-            <Button mnemonicParsing="false" text="FS" />
-            <Button mnemonicParsing="false" text="X" />
-         </buttons>
-         <padding>
-            <Insets bottom="7.0" left="7.0" right="7.0" top="7.0" />
-         </padding>
-      </ButtonBar>
-   </top>
-</BorderPane>
+      </AnchorPane>
+   </children>
+</AnchorPane>

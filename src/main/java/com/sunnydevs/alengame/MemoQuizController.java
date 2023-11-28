@@ -21,7 +21,7 @@ public class MemoQuizController extends Quiz{
     @FXML
     private Label memoHolder;
 
-    private int counter;
+    int counter;
     ArrayList<Integer> correctQuestions = new ArrayList<>();
     ArrayList<Integer> incorrectQuestions = new ArrayList<>();
     ArrayList<Map<String, Object>> questions = generateQuestions();

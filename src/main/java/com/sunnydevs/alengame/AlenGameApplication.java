@@ -16,7 +16,6 @@ public class AlenGameApplication extends Application {
         stage.setScene(scene);
         stage.setMaximized(true);
         stage.setFullScreen(true);
-        stage.setFullScreenExitHint("");
         stage.show();
     }
 

@@ -18,11 +18,14 @@ public abstract class Quiz {
     static int NUM_OF_QUESTIONS = 10;
 
     static void setOptions(GridPane btnsContainer, ArrayList<Map<String, Object>> questions, int counter) {
+        System.out.println(counter);
         List<Node> btns = btnsContainer.getChildren();
+        ArrayList<String> opts = (ArrayList<String>) questions.get(counter).get("options");
+        System.out.println(opts);
         for (int i = 0; i < btns.size(); i++) {
             Node btn = btns.get(i);
             if (btn instanceof Button) {
-                ((Button) btn).setText(((ArrayList<String>) questions.get(counter).get("options")).get(i));
+                ((Button) btn).setText(opts.get(i));
             }
         }
     }
@@ -46,29 +49,25 @@ public abstract class Quiz {
         ArrayList<Map<String, Object>> questions = new ArrayList<>();
 
         try {
-            ArrayList<Person> allPeople = Person.all();
-            Collections.shuffle(allPeople);
+            ArrayList<Person> dataSet = Person.generateDataSetForQuiz(1);
+            Collections.shuffle(dataSet);
+            ArrayList<String> names = Person.allNames();
 
-            for (Person p : allPeople) {
-                if (questions.size() != PhotoQuizController.NUM_OF_QUESTIONS) {
-                    Map<String, Object> question = new HashMap<>();
+            for (Person p : dataSet) {
+                Map<String, Object> question = new HashMap<>();
 
-                    // generate 4 options for question
-                    ArrayList<String> opts = new ArrayList<>();
-                    while (opts.size() != 4) {
-                        opts.add(Person.allNames().get(rd.nextInt(allPeople.size())));
-                    }
-
-                    // Set first opt as correct option.
-                    if (opts.contains(p.name())) {
-                        Collections.swap(opts, 0, opts.indexOf(p.name()));
-                    } else {
-                        opts.set(0, p.name());
-                    }
-
-                    question.put("options", opts);
-                    questions.add(question);
+                // generate 4 options for question
+                ArrayList<String> opts = new ArrayList<>();
+                opts.add(p.name());
+                while (opts.size() != 4) {
+                    String name = names.get(rd.nextInt(dataSet.size()));
+                    if (!opts.contains(name))
+                        opts.add(name);
                 }
+                Collections.shuffle(opts);
+                question.put("options", opts);
+                question.put("correct", p.name());
+                questions.add(question);
             }
             return questions;
         } catch (SQLException e) {

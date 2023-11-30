@@ -4,9 +4,12 @@ import com.sunnydevs.alengame.db.Person;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 import java.sql.SQLException;
@@ -19,7 +22,9 @@ public class MemoQuizController extends Quiz{
     @FXML
     private GridPane btnsContainer;
     @FXML
-    private Label memoHolder;
+    private Text memoHolder;
+    @FXML
+    private AnchorPane innerAnchorPane, outerAnchorPane;
 
     int counter;
     ArrayList<Integer> correctQuestions = new ArrayList<>();
@@ -28,30 +33,51 @@ public class MemoQuizController extends Quiz{
 
     @FXML
     private void initialize() {
-        questions = generateQuestions();
-        Quiz.setOptions(btnsContainer, questions, counter);
-        questionNum.setText("#1");
-        memoHolder.setText((String) questions.get(counter).get("memo"));
-        counter++;
+        AnchorPane.setTopAnchor(innerAnchorPane, (outerAnchorPane.getHeight() - innerAnchorPane.getPrefHeight()) / 2);
+        AnchorPane.setLeftAnchor(innerAnchorPane, (outerAnchorPane.getWidth() - innerAnchorPane.getPrefWidth()) / 2);
+
+        // Bind layout constraints to outer AnchorPane's size changes
+        outerAnchorPane.heightProperty().addListener((observable, oldValue, newValue) ->
+                AnchorPane.setTopAnchor(innerAnchorPane, (newValue.doubleValue() - innerAnchorPane.getPrefHeight()) / 2));
+
+        outerAnchorPane.widthProperty().addListener((observable, oldValue, newValue) ->
+                AnchorPane.setLeftAnchor(innerAnchorPane, (newValue.doubleValue() - innerAnchorPane.getPrefWidth()) / 2));
+
+        for (Node btn : btnsContainer.getChildren()) {
+            btn.setOnMouseEntered(super::handleMouseEnter);
+            btn.setOnMouseExited(super::handleMouseExit);
+        }
+        nextQuestion(null);
     }
 
     @FXML
     void nextQuestion(ActionEvent event) {
-        if (counter != NUM_OF_QUESTIONS) {
-            questionNum.setText("#" + (counter + 1));
-            ArrayList<String> options = (ArrayList<String>) questions.get(counter).get("options");
-
-            if (options.indexOf(((Button) event.getSource()).getText()) == 0)
-                correctQuestions.add(counter);
-            else
-                incorrectQuestions.add(counter);
+        if (event == null) {
             Quiz.setOptions(btnsContainer, questions, counter);
-
+            questionNum.setText("#" + (counter + 1));
             memoHolder.setText((String) questions.get(counter).get("memo"));
             counter++;
-        } else {
-            showResults(((Stage) ((Button) event.getSource()).getScene().getWindow()));
+            return;
         }
+
+        if (((Button) event.getSource()).getText() == questions.get(counter - 1).get("correct")) {
+            correctQuestions.add(counter - 1);
+        } else {
+            incorrectQuestions.add(counter - 1);
+        }
+
+        if (counter == NUM_OF_QUESTIONS) {
+            System.out.println(correctQuestions);
+            System.out.println(incorrectQuestions);
+            showResults(((Stage) ((Button) event.getSource()).getScene().getWindow()), correctQuestions.size());
+            return;
+        }
+
+        questionNum.setText("#" + (counter + 1));
+        Quiz.setOptions(btnsContainer, questions, counter);
+
+        memoHolder.setText((String) questions.get(counter).get("memo"));
+        counter++;
     }
 
     @Override
@@ -59,7 +85,7 @@ public class MemoQuizController extends Quiz{
         ArrayList<Map<String, Object>> rawQuestions = super.generateQuestions();
         for (Map<String, Object> question : rawQuestions) {
             try {
-                Person person = Person.getByName(((ArrayList<String>) question.get("options")).get(0));
+                Person person = Person.getByName((String) question.get("correct"));
                 question.put("memo", person.memo());
             } catch (SQLException e) {
                 throw new RuntimeException(e);

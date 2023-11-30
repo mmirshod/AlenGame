@@ -16,21 +16,31 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Map;
 
-public class MemoQuizController extends Quiz{
+/**
+ * Controller class for the Memo Quiz screen.
+ */
+public class MemoQuizController extends Quiz {
+
     @FXML
     private Label questionNum;
+
     @FXML
     private GridPane btnsContainer;
+
     @FXML
     private Text memoHolder;
+
     @FXML
     private AnchorPane innerAnchorPane, outerAnchorPane;
 
-    int counter;
-    ArrayList<Integer> correctQuestions = new ArrayList<>();
-    ArrayList<Integer> incorrectQuestions = new ArrayList<>();
-    ArrayList<Map<String, Object>> questions = generateQuestions();
+    private int counter;
+    private final ArrayList<Integer> correctQuestions = new ArrayList<>();
+    private final ArrayList<Integer> incorrectQuestions = new ArrayList<>();
+    private final ArrayList<Map<String, Object>> questions = generateQuestions();
 
+    /**
+     * Initializes the Memo Quiz controller.
+     */
     @FXML
     private void initialize() {
         super.setUpAnchorPaneConstraints(innerAnchorPane, outerAnchorPane);
@@ -42,6 +52,11 @@ public class MemoQuizController extends Quiz{
         nextQuestion(null);
     }
 
+    /**
+     * Handles the next question action.
+     *
+     * @param event The action event.
+     */
     @FXML
     void nextQuestion(ActionEvent event) {
         if (event == null) {
@@ -52,7 +67,7 @@ public class MemoQuizController extends Quiz{
             return;
         }
 
-        if (((Button) event.getSource()).getText() == questions.get(counter - 1).get("correct")) {
+        if (((Button) event.getSource()).getText().equals(questions.get(counter - 1).get("correct"))) {
             correctQuestions.add(counter - 1);
         } else {
             incorrectQuestions.add(counter - 1);
@@ -72,6 +87,11 @@ public class MemoQuizController extends Quiz{
         counter++;
     }
 
+    /**
+     * Generates questions for the Memo Quiz.
+     *
+     * @return A list of questions.
+     */
     @Override
     ArrayList<Map<String, Object>> generateQuestions() {
         ArrayList<Map<String, Object>> rawQuestions = super.generateQuestions();

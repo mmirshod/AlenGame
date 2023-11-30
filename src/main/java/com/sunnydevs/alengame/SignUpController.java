@@ -13,6 +13,9 @@ import javafx.scene.control.TextField;
 
 import java.io.IOException;
 
+/**
+ * Controller class for the sign-up view in the AlenGame application.
+ */
 public final class SignUpController {
     @FXML
     TextField username, age, firstName, lastName;
@@ -21,6 +24,9 @@ public final class SignUpController {
     @FXML
     Button signInBtn, signUpBtn;
 
+    /**
+     * Initializes the sign-up view.
+     */
     @FXML
     private void initialize() {
         bindUsernameProperty();
@@ -28,6 +34,9 @@ public final class SignUpController {
         signInBtn.setOnAction(signInHandler);
     }
 
+    /**
+     * Handles the sign-up button action.
+     */
     private final EventHandler<ActionEvent> signUpHandler = e -> {
         String firstNameInput = firstName.getText();
         String lastNameInput = lastName.getText();
@@ -37,6 +46,9 @@ public final class SignUpController {
         User.signUp(firstNameInput, lastNameInput, ageInput, password);
     };
 
+    /**
+     * Handles the sign-in button action.
+     */
     private final EventHandler<ActionEvent> signInHandler = e -> {
         try {
             ((Button) e.getSource()).getScene().setRoot((new FXMLLoader(getClass().getResource("SignIn.fxml")).load()));
@@ -45,6 +57,9 @@ public final class SignUpController {
         }
     };
 
+    /**
+     * Binds the username property based on the values of first name, last name, and age.
+     */
     private void bindUsernameProperty() {
         StringBinding concatenatedValue = Bindings.createStringBinding(
                 () -> String.format("%s%s%s",

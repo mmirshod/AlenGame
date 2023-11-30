@@ -14,6 +14,9 @@ import javafx.stage.Stage;
 import java.io.IOException;
 import java.sql.SQLException;
 
+/**
+ * Controller class for the sign-in view in the AlenGame application.
+ */
 public class SignInController {
     @FXML
     TextField username;
@@ -22,12 +25,18 @@ public class SignInController {
     @FXML
     Button signInBtn, signUpBtn;
 
+    /**
+     * Initializes the sign-in view.
+     */
     @FXML
     void initialize() {
         signInBtn.setOnAction(signInHandler);
         signUpBtn.setOnAction(signUpHandler);
     }
 
+    /**
+     * Handles the sign-up button action.
+     */
     EventHandler<ActionEvent> signUpHandler = e -> {
         try {
             ((Button) e.getSource()).getScene().setRoot((new FXMLLoader(getClass().getResource("SignUp.fxml")).load()));
@@ -36,6 +45,9 @@ public class SignInController {
         }
     };
 
+    /**
+     * Handles the sign-in button action.
+     */
     EventHandler<ActionEvent> signInHandler = event -> {
         String pwd = password.getText();
         String user = username.getText();

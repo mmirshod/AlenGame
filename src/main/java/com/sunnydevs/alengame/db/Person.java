@@ -7,6 +7,9 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Objects;
 
+/**
+ * Model representation of a person in the AlenGame application, stored in the database.
+ */
 public final class Person extends GetConnection {
     private final int id;
     private final String name;
@@ -26,6 +29,17 @@ public final class Person extends GetConnection {
         this.groupId = groupId;
     }
 
+    /**
+     * Creates a new Person entry in the database.
+     *
+     * @param name    The name of the person.
+     * @param userId  The user ID associated with the person.
+     * @param age     The age of the person.
+     * @param photo   The photo of the person in byte array format.
+     * @param memo    Additional information or memo about the person.
+     * @param groupId The group ID associated with the person.
+     * @throws SQLException If a database access error occurs.
+     */
     public static void _new(String name, int userId, int age, byte[] photo, String memo, int groupId) throws SQLException {
         PreparedStatement preparedStatement = conn.prepareStatement("INSERT INTO person (name, age, photo, memo, group_id, user_id) VALUES (?, ?, ?, ?, ?, ?)");
         preparedStatement.setString(1, name);
@@ -38,6 +52,12 @@ public final class Person extends GetConnection {
         preparedStatement.close();
     }
 
+    /**
+     * Deletes a person entry from the database based on the provided ID.
+     *
+     * @param id The ID of the person to be deleted.
+     * @throws SQLException If a database access error occurs.
+     */
     public static void _delete(Integer id) throws SQLException {
         PreparedStatement preparedStatement = conn.prepareStatement("DELETE FROM person WHERE id=?");
         preparedStatement.setInt(1, id);
@@ -45,6 +65,13 @@ public final class Person extends GetConnection {
         preparedStatement.close();
     }
 
+    /**
+     * Retrieves a Person from the database based on the provided ID.
+     *
+     * @param id The ID of the person to be retrieved.
+     * @return The retrieved Person object.
+     * @throws SQLException If a database access error occurs.
+     */
     public static Person get(Integer id) throws SQLException {
         PreparedStatement preparedStatement = conn.prepareStatement("SELECT * FROM person WHERE id=?");
         preparedStatement.setInt(1, id);
@@ -53,6 +80,13 @@ public final class Person extends GetConnection {
         return _getFromResultSet(res);
     }
 
+    /**
+     * Retrieves a Person from the database based on the provided name.
+     *
+     * @param name The name of the person to be retrieved.
+     * @return The retrieved Person object.
+     * @throws SQLException If a database access error occurs.
+     */
     public static Person getByName(String name) throws SQLException {
         PreparedStatement statement = conn.prepareStatement("SELECT * FROM person WHERE name=?");
         statement.setString(1, name);
@@ -62,6 +96,12 @@ public final class Person extends GetConnection {
         throw new RuntimeException();
     }
 
+    /**
+     * Retrieves the first Person entry from the database.
+     *
+     * @return The first Person entry.
+     * @throws SQLException If a database access error occurs.
+     */
     public static Person first() throws SQLException {
         PreparedStatement preparedStatement = conn.prepareStatement("SELECT * FROM person ORDER BY id LIMIT 1");
         ResultSet res = preparedStatement.executeQuery();
@@ -69,6 +109,12 @@ public final class Person extends GetConnection {
         return _getFromResultSet(res);
     }
 
+    /**
+     * Retrieves all Person entries from the database.
+     *
+     * @return An ArrayList of all Person objects.
+     * @throws SQLException If a database access error occurs.
+     */
     static public ArrayList<Person> all() throws SQLException {
         PreparedStatement st = conn.prepareStatement("SELECT * from person where group_id = 1;");
         ResultSet res = st.executeQuery();
@@ -80,6 +126,13 @@ public final class Person extends GetConnection {
         return allPeople;
     }
 
+    /**
+     * Generates a data set of Person objects for a quiz based on the provided group ID.
+     *
+     * @param groupId The group ID for the quiz data set.
+     * @return An ArrayList of Person objects for the quiz.
+     * @throws SQLException If a database access error occurs.
+     */
     static public ArrayList<Person> generateDataSetForQuiz(int groupId) throws SQLException {
         PreparedStatement st = conn.prepareStatement("SELECT * from person where group_id = ? ORDER BY random() LIMIT 10;");
         st.setInt(1, groupId);
@@ -92,6 +145,12 @@ public final class Person extends GetConnection {
         return allPeople;
     }
 
+    /**
+     * Retrieves all names of Person entries from the database.
+     *
+     * @return An ArrayList of names of all Person entries.
+     * @throws SQLException If a database access error occurs.
+     */
     public static ArrayList<String> allNames() throws SQLException {
         ArrayList<String> allNames = new ArrayList<>();
         for (Person p : Person.all())
@@ -100,6 +159,13 @@ public final class Person extends GetConnection {
         return allNames;
     }
 
+    /**
+     * Creates a Person object from a ResultSet.
+     *
+     * @param res The ResultSet containing the Person data.
+     * @return The created Person object.
+     * @throws SQLException If a database access error occurs.
+     */
     static Person _getFromResultSet(ResultSet res) throws SQLException {
          return new Person(
                     res.getInt("id"),
@@ -112,32 +178,35 @@ public final class Person extends GetConnection {
             );
     }
 
+    /**
+     * Gets the ID of the Person.
+     *
+     * @return int The ID of the Person.
+     */
     public int id() {
         return id;
     }
 
+    /**
+     * Gets the name of the Person.
+     *
+     * @return String The name of the Person.
+     */
     public String name() {
         return name;
     }
 
-    public int age() {
-        return age;
-    }
-
+    /**
+     * Gets the photo of the Person as a JavaFX Image.
+     *
+     * @return The photo of the Person.
+     */
     public javafx.scene.image.Image photo() {
         return new Image(new java.io.ByteArrayInputStream(this.photo));
     }
 
     public String memo() {
         return memo;
-    }
-
-    public int groupId() {
-        return groupId;
-    }
-
-    public int userId() {
-        return userId;
     }
 
     @Override
@@ -165,5 +234,4 @@ public final class Person extends GetConnection {
                 "age=" + age + ", " +
                 "memo=" + memo + ']';
     }
-
 }

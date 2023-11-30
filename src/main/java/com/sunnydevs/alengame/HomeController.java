@@ -9,9 +9,17 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
+/**
+ * Controller class for the home screen.
+ */
 public class HomeController {
+
     @FXML
     private Button playBtn, playBtn1, settingsBtn;
+
+    /**
+     * Initializes the controller.
+     */
     @FXML
     private void initialize() {
         playBtn.setOnAction(new EventHandler<>() {

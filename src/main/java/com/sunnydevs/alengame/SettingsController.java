@@ -13,6 +13,9 @@ import javafx.stage.Stage;
 import java.io.ByteArrayInputStream;
 import java.sql.SQLException;
 
+/**
+ * Controller class for the user settings view in the AlenGame application.
+ */
 public class SettingsController {
     @FXML
     TextField firstName, lastName, age;
@@ -23,14 +26,15 @@ public class SettingsController {
 
     User current_user;
 
+    /**
+     * Initializes the user settings view.
+     */
     @FXML
     private void initialize() {
-        {
-            try {
-                current_user = User.getUser(null);
-            } catch (SQLException e) {
-                throw new RuntimeException(e);
-            }
+        try {
+            current_user = User.getUser(null);
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
         }
 
         firstName.textProperty().bindBidirectional(current_user.firstNameProperty());
@@ -38,12 +42,15 @@ public class SettingsController {
         age.textProperty().bindBidirectional(current_user.ageProperty());
         if (current_user.userPhotoProperty().get() != null)
             avatar.imageProperty().bind(Bindings.createObjectBinding(() ->
-                    (current_user.userPhotoProperty().get() != null) ? new Image(new ByteArrayInputStream(current_user.userPhotoProperty().get())) : null,
+                            (current_user.userPhotoProperty().get() != null) ? new Image(new ByteArrayInputStream(current_user.userPhotoProperty().get())) : null,
                     current_user.userPhotoProperty()));
 
         setListeners();
     }
 
+    /**
+     * Sets listeners for the buttons.
+     */
     private void setListeners() {
         edit.setOnAction(event -> {
 

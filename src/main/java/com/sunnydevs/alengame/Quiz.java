@@ -9,23 +9,30 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
-import javafx.scene.paint.Color;
 import javafx.stage.Stage;
-import javafx.stage.StageStyle;
 
 import org.jetbrains.annotations.NotNull;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.*;
 
+/**
+ * Abstract class representing the base functionality for a quiz in the AlenGame application.
+ */
 public abstract class Quiz {
+
     static int NUM_OF_QUESTIONS = 10;
 
+    /**
+     * Sets the options for the quiz buttons based on the current question.
+     *
+     * @param btnsContainer The GridPane containing the quiz buttons.
+     * @param questions     The list of questions with associated information.
+     * @param counter       The current question counter.
+     */
     static void setOptions(GridPane btnsContainer, ArrayList<Map<String, Object>> questions, int counter) {
-        System.out.println(counter);
         List<Node> btns = btnsContainer.getChildren();
         ArrayList<String> opts = (ArrayList<String>) questions.get(counter).get("options");
-        System.out.println(opts);
         for (int i = 0; i < btns.size(); i++) {
             Node btn = btns.get(i);
             if (btn instanceof Button) {
@@ -34,7 +41,13 @@ public abstract class Quiz {
         }
     }
 
-    protected void showResults(Stage stage, int corrects){
+    /**
+     * Shows the quiz results in a new stage.
+     *
+     * @param stage    The primary stage of the application.
+     * @param corrects The number of correct answers.
+     */
+    protected void showResults(Stage stage, int corrects) {
         try {
             stage.close();
             FXMLLoader resultsView = new FXMLLoader(getClass().getResource("Result.fxml"));
@@ -51,25 +64,43 @@ public abstract class Quiz {
         }
     }
 
+    /**
+     * Sets the initial styles for quiz buttons.
+     *
+     * @param btn The button to set styles for.
+     */
     protected void setButtonStyles(@NotNull Button btn) {
         btn.setStyle("-fx-background-color: #ffffff; -fx-text-fill: #000000; -fx-border-color: #808080");
     }
 
+    /**
+     * Handles the mouse enter event for quiz buttons.
+     *
+     * @param event The MouseEvent triggering the event.
+     */
     protected void handleMouseEnter(@NotNull MouseEvent event) {
-        // Change styles on mouse enter
         ((Button) event.getSource()).setStyle("-fx-background-color: rgb(99,111,255); -fx-text-fill: #fcfafa;");
     }
 
+    /**
+     * Handles the mouse exit event for quiz buttons.
+     *
+     * @param event The MouseEvent triggering the event.
+     */
     protected void handleMouseExit(@NotNull MouseEvent event) {
-        // Change styles on mouse exit
         setButtonStyles((Button) event.getSource());
     }
 
+    /**
+     * Sets up the AnchorPane constraints for centering it within an outer AnchorPane.
+     *
+     * @param innerAnchorPane The inner AnchorPane to be centered.
+     * @param outerAnchorPane The outer AnchorPane.
+     */
     protected void setUpAnchorPaneConstraints(AnchorPane innerAnchorPane, AnchorPane outerAnchorPane) {
         AnchorPane.setTopAnchor(innerAnchorPane, (outerAnchorPane.getHeight() - innerAnchorPane.getPrefHeight()) / 2);
         AnchorPane.setLeftAnchor(innerAnchorPane, (outerAnchorPane.getWidth() - innerAnchorPane.getPrefWidth()) / 2);
 
-        // Bind layout constraints to outer AnchorPane's size changes
         outerAnchorPane.heightProperty().addListener((observable, oldValue, newValue) ->
                 AnchorPane.setTopAnchor(innerAnchorPane, (newValue.doubleValue() - innerAnchorPane.getPrefHeight()) / 2));
 
@@ -77,6 +108,11 @@ public abstract class Quiz {
                 AnchorPane.setLeftAnchor(innerAnchorPane, (newValue.doubleValue() - innerAnchorPane.getPrefWidth()) / 2));
     }
 
+    /**
+     * Generates questions for the quiz.
+     *
+     * @return A list of questions with associated information.
+     */
     ArrayList<Map<String, Object>> generateQuestions() {
         Random rd = new Random();
         ArrayList<Map<String, Object>> questions = new ArrayList<>();
@@ -88,8 +124,6 @@ public abstract class Quiz {
 
             for (Person p : dataSet) {
                 Map<String, Object> question = new HashMap<>();
-
-                // generate 4 options for question
                 ArrayList<String> opts = new ArrayList<>();
                 opts.add(p.name());
                 while (opts.size() != 4) {

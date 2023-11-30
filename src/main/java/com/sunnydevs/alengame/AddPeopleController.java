@@ -1,7 +1,7 @@
 package com.sunnydevs.alengame;
 
 import com.sunnydevs.alengame.db.Person;
-import javafx.event.ActionEvent;
+
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
@@ -11,13 +11,16 @@ import javafx.scene.image.ImageView;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
-import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.sql.SQLException;
 
+/**
+ * Controller class for the "AddPeople.fxml" view.
+ */
 public class AddPeopleController {
+
     @FXML
     private ImageView imgView;
 
@@ -35,14 +38,22 @@ public class AddPeopleController {
 
     @FXML
     private Button add;
+
     private File selectedFile;
 
+    /**
+     * Initializes the controller, setting up event handlers for buttons.
+     */
     @FXML
     private void initialize() {
         selectImg.setOnAction(e -> handleSelectImage());
         add.setOnAction(e -> handleAdd());
     }
 
+    /**
+     * Handles the event when the user clicks the "Select Image" button.
+     * Opens a file chooser dialog to select an image file.
+     */
     @FXML
     private void handleSelectImage() {
         FileChooser fileChooser = new FileChooser();
@@ -58,6 +69,10 @@ public class AddPeopleController {
         }
     }
 
+    /**
+     * Handles the event when the user clicks the "Add" button.
+     * Adds a new person to the database based on the entered information.
+     */
     @FXML
     private void handleAdd() {
         try {
@@ -67,6 +82,8 @@ public class AddPeopleController {
             String memo = quoteField.getText();
             byte[] pic = Files.readAllBytes(selectedFile.toPath());
             Person._new(name, 1, age, pic, memo, 1);
+
+            // Redirect to the home screen after adding the person
             add.getScene().setRoot((new FXMLLoader(getClass().getResource("home.fxml"))).load());
         } catch (IOException | SQLException e) {
             throw new RuntimeException(e);

@@ -6,7 +6,22 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+/**
+ * Represents a user in the AlenGame application, stored in the database.
+ */
 public class User extends GetConnection {
+
+    private static User user;
+
+    private final IntegerProperty id;
+    private final StringProperty firstName;
+    private final StringProperty lastName;
+    private final StringProperty age;
+    private final ObjectProperty<int[]> contacts;
+    private final ObjectProperty<byte[]> userPhoto;
+    private final String username;
+    private final String password;
+
     private User(int userId, String firstName, String lastName, int age, int[] contacts, byte[] userPhoto, String password, String username) {
         this.id = new SimpleIntegerProperty(userId);
         this.firstName = new SimpleStringProperty(firstName);
@@ -18,6 +33,13 @@ public class User extends GetConnection {
         this.password = password;
     }
 
+    /**
+     * Gets the user from the database based on the provided username.
+     *
+     * @param username The username of the user to be retrieved.
+     * @return The retrieved User object.
+     * @throws SQLException If a database access error occurs.
+     */
     public static synchronized User getUser(String username) throws SQLException {
         if (user == null) {
             PreparedStatement preparedStatement = conn.prepareStatement("SELECT * FROM users WHERE username = ?");
@@ -44,9 +66,19 @@ public class User extends GetConnection {
         throw new RuntimeException();
     }
 
-    public static synchronized User signUp(String firstName, String lastName, int age, String password) {
+    /**
+     * Signs up a new user in the database.
+     *
+     * @param firstName The first name of the new user.
+     * @param lastName  The last name of the new user.
+     * @param age       The age of the new user.
+     * @param password  The password of the new user.
+     */
+    public static synchronized void signUp(String firstName, String lastName, int age, String password) {
         try {
-            PreparedStatement preparedStatement = conn.prepareStatement("INSERT INTO users (first_name, last_name, username, age, password) VALUES (?, ?, ?, ?, ?)");
+            PreparedStatement preparedStatement = conn.prepareStatement(
+                    "INSERT INTO users (first_name, last_name, username, age, password) VALUES (?, ?, ?, ?, ?)"
+            );
             preparedStatement.setString(1, firstName);
             preparedStatement.setString(2, lastName);
             String username = firstName.toLowerCase().concat(lastName.toLowerCase()).concat(String.valueOf(age));
@@ -56,12 +88,17 @@ public class User extends GetConnection {
 
             preparedStatement.executeUpdate();
             user = null;
-            return User.getUser(username);
+            User.getUser(username);
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
     }
 
+    /**
+     * Sets the first name of the user in the database.
+     *
+     * @param firstName The new first name of the user.
+     */
     public final void setFirstName(String firstName) {
         try {
             PreparedStatement preparedStatement = conn.prepareStatement("UPDATE users SET first_name = ? WHERE id = ?");
@@ -75,6 +112,11 @@ public class User extends GetConnection {
         }
     }
 
+    /**
+     * Sets the last name of the user in the database.
+     *
+     * @param lastName The new last name of the user.
+     */
     public final void setLastName(String lastName) {
         try {
             PreparedStatement preparedStatement = conn.prepareStatement("UPDATE users SET last_name = ? WHERE id = ?");
@@ -88,6 +130,11 @@ public class User extends GetConnection {
         }
     }
 
+    /**
+     * Sets the age of the user in the database.
+     *
+     * @param age The new age of the user.
+     */
     public final void setAge(int age) {
         try {
             PreparedStatement preparedStatement = conn.prepareStatement("UPDATE users SET age = ? WHERE id = ?");
@@ -100,37 +147,57 @@ public class User extends GetConnection {
             throw new RuntimeException(e);
         }
     }
-// #2E3348
-    static User user;
 
-    private final IntegerProperty id;
-    private final StringProperty firstName;
-    private final StringProperty lastName;
-    private final StringProperty age;
-    private final ObjectProperty<int[]> contacts;
-    private final ObjectProperty<byte[]> userPhoto;
-    private final String username;
-    private final String password;
-
+    /**
+     * Gets the first name property of the User.
+     *
+     * @return The first name property of the User.
+     */
     public final StringProperty firstNameProperty() {
         return user.firstName;
     }
 
+    /**
+     * Gets the last name property of the User.
+     *
+     * @return The last name property of the User.
+     */
     public final StringProperty lastNameProperty() {
         return user.lastName;
     }
 
+    /**
+     * Gets the user photo property of the User.
+     *
+     * @return The user photo property of the User.
+     */
     public final ObjectProperty<byte[]> userPhotoProperty() {
         return user.userPhoto;
     }
 
+    /**
+     * Gets the age property of the User.
+     *
+     * @return The age property of the User.
+     */
     public final StringProperty ageProperty() {
         return user.age;
     }
+
+    /**
+     * Gets the username of the User.
+     *
+     * @return The username of the User.
+     */
     public final String username() {
         return username;
     }
 
+    /**
+     * Gets the password of the User.
+     *
+     * @return The password of the User.
+     */
     public String password() {
         return password;
     }

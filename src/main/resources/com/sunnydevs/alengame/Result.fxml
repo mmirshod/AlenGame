@@ -4,33 +4,49 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane prefHeight="400.0" prefWidth="700.0" style="-fx-background-color: #2E3348;" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.sunnydevs.alengame.Result">
+
+<AnchorPane prefHeight="400.0" prefWidth="700.0" style="-fx-background-color: #2E3348;" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.sunnydevs.alengame.ResultsController">
    <children>
-      <AnchorPane layoutY="94.0" prefHeight="306.0" prefWidth="702.0" style="-fx-background-color: #fcfafa;">
+      <AnchorPane layoutY="94.0" prefHeight="362.0" prefWidth="702.0" style="-fx-background-color: #fcfafa;">
          <children>
-            <ProgressIndicator blendMode="DARKEN" layoutX="133.0" layoutY="65.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="150.0" prefWidth="150.0" progress="0.9" style="-fx-progress-color: #2ca177;" />
-            <ProgressIndicator layoutX="424.0" layoutY="65.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="150.0" prefWidth="150.0" progress="0.1" style="-fx-progress-color: #800000;" />
-            <Label layoutX="143.0" layoutY="231.0" prefHeight="24.0" prefWidth="139.0" text="Correct Answers: 9" textFill="#2ca177">
+            <ProgressIndicator fx:id="correctProgress" blendMode="DARKEN" layoutX="133.0" layoutY="65.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="150.0" prefWidth="150.0" progress="0.9" style="-fx-progress-color: #2ca177;" />
+            <ProgressIndicator fx:id="incorrectProgress" layoutX="424.0" layoutY="65.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="150.0" prefWidth="150.0" progress="0.1" style="-fx-progress-color: #800000;" />
+            <Label layoutX="133.0" layoutY="231.0" prefHeight="26.0" prefWidth="130.0" text="Correct Answers:" textFill="#2ca177">
                <font>
                   <Font size="17.0" />
                </font>
             </Label>
-            <Label layoutX="423.0" layoutY="231.0" text="Incorrect Answers: 1" textFill="MAROON">
+            <Label layoutX="424.0" layoutY="231.0" text="Incorrect Answers:" textFill="MAROON">
                <font>
                   <Font size="17.0" />
                </font>
             </Label>
-            <Label layoutX="307.0" layoutY="29.0" text="Good work!">
+            <Text fx:id="resText" layoutX="226.0" layoutY="36.0" text="Good work!" textAlignment="CENTER" wrappingWidth="250.0">
+               <font>
+                  <Font name="Comic Sans MS Bold Italic" size="20.0" />
+               </font>
+            </Text>
+            <Label fx:id="correctNum" layoutX="263.0" layoutY="231.0" text="9" textFill="#2ca177">
                <font>
                   <Font size="17.0" />
                </font>
             </Label>
-         </children></AnchorPane>
+            <Label fx:id="incorrectNum" layoutX="569.0" layoutY="231.0" text="9" textFill="MAROON">
+               <font>
+                  <Font size="17.0" />
+               </font>
+            </Label>
+            <Button fx:id="backBtn" layoutX="272.0" layoutY="280.0" mnemonicParsing="false" onAction="#goToHomePage" prefHeight="19.0" prefWidth="174.0" style="-fx-background-color: #2E3348; -fx-background-radius: 30;" text="Go Home" textFill="#fcfafa">
+               <font>
+                  <Font name="Comic Sans MS" size="25.0" />
+               </font>
+            </Button>
+         </children>
+      </AnchorPane>
       <Label layoutX="302.0" layoutY="25.0" prefHeight="53.0" prefWidth="98.0" text="Result" textFill="#fcfafa">
          <font>
             <Font size="36.0" />
          </font>
       </Label>
-      <ProgressIndicator layoutX="232.0" layoutY="26.0" />
    </children>
 </AnchorPane>

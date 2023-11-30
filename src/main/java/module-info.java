@@ -10,6 +10,7 @@ module com.sunnydevs.alengame {
             requires org.kordamp.bootstrapfx.core;
             requires eu.hansolo.tilesfx;
     requires java.sql;
+    requires org.jetbrains.annotations;
 
     opens com.sunnydevs.alengame to javafx.fxml;
     exports com.sunnydevs.alengame;

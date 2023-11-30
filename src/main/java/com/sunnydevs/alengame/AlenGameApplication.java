@@ -10,12 +10,11 @@ import java.io.IOException;
 public class AlenGameApplication extends Application {
     @Override
     public void start(Stage stage) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(AlenGameApplication.class.getResource("home.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(AlenGameApplication.class.getResource("SignUp.fxml"));
         Scene scene = new Scene(fxmlLoader.load());
-        stage.setTitle("Hello!");
+        stage.setTitle("AlenGame");
         stage.setScene(scene);
         stage.setMaximized(true);
-        stage.setFullScreen(true);
         stage.show();
     }
 

@@ -1,7 +1,9 @@
 package com.sunnydevs.alengame;
 
 import com.sunnydevs.alengame.db.Person;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
@@ -65,6 +67,7 @@ public class AddPeopleController {
             String memo = quoteField.getText();
             byte[] pic = Files.readAllBytes(selectedFile.toPath());
             Person._new(name, 1, age, pic, memo, 1);
+            add.getScene().setRoot((new FXMLLoader(getClass().getResource("home.fxml"))).load());
         } catch (IOException | SQLException e) {
             throw new RuntimeException(e);
         }

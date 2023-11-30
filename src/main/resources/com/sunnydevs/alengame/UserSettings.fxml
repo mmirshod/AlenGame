@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane prefHeight="474.0" prefWidth="800.0" style="-fx-background-color: #2E3348;" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.sunnydevs.alengame.SettingsController">
+   <children>
+      <Label layoutX="295.0" layoutY="26.0" text="User Settings" textFill="#fcfafa">
+         <font>
+            <Font size="36.0" />
+         </font>
+      </Label>
+      <AnchorPane layoutY="93.0" prefHeight="381.0" prefWidth="800.0" style="-fx-background-color: #fafafa;">
+         <children>
+            <ImageView fx:id="avatar" fitHeight="209.0" fitWidth="148.0" layoutX="32.0" layoutY="24.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../../../../Images/png-transparent-computer-icons-user-user-icon.png" />
+               </image>
+            </ImageView>
+            <Button fx:id="addPeople" layoutX="92.0" layoutY="293.0" mnemonicParsing="false" prefHeight="38.0" prefWidth="148.0" style="-fx-background-color: #F89344;" text="Add People" textFill="#fcfafa">
+               <font>
+                  <Font size="17.0" />
+               </font>
+            </Button>
+            <Button fx:id="resetDB" layoutX="561.0" layoutY="293.0" mnemonicParsing="false" prefHeight="38.0" prefWidth="148.0" style="-fx-background-color: #F89344;" text="Reset Database" textFill="#fcfafa">
+               <font>
+                  <Font size="17.0" />
+               </font>
+            </Button>
+            <VBox layoutX="215.0" layoutY="24.0" spacing="5.0">
+               <children>
+                  <Label prefHeight="22.0" prefWidth="82.0" text="First Name">
+                     <font>
+                        <Font name="Comic Sans MS Italic" size="15.0" />
+                     </font>
+                  </Label>
+                  <TextField fx:id="firstName" editable="false" prefHeight="39.0" prefWidth="370.0" style="-fx-border-color: #2E3348;" text=" Alen">
+                     <font>
+                        <Font size="17.0" />
+                     </font>
+                  </TextField>
+                  <Label prefHeight="22.0" prefWidth="82.0" text="First Name">
+                     <font>
+                        <Font name="Comic Sans MS Italic" size="15.0" />
+                     </font>
+                  </Label>
+                  <TextField fx:id="lastName" editable="false" prefHeight="39.0" prefWidth="370.0" style="-fx-border-color: #2E3348;" text=" Karimov">
+                     <font>
+                        <Font size="17.0" />
+                     </font>
+                  </TextField>
+                  <Label prefHeight="22.0" prefWidth="50.0" text="Age">
+                     <font>
+                        <Font name="Comic Sans MS Italic" size="15.0" />
+                     </font>
+                  </Label>
+                  <TextField fx:id="age" editable="false" prefHeight="39.0" prefWidth="370.0" style="-fx-border-color: #2E3348;" text="Age">
+                     <font>
+                        <Font size="17.0" />
+                     </font>
+                  </TextField>
+               </children>
+            </VBox>
+            <Button fx:id="edit" layoutX="331.0" layoutY="293.0" mnemonicParsing="false" prefHeight="38.0" prefWidth="148.0" style="-fx-background-color: #F89344;" text="Edit" textFill="#fcfafa">
+               <font>
+                  <Font size="17.0" />
+               </font>
+            </Button>
+         </children>
+      </AnchorPane>
+   </children>
+</AnchorPane>

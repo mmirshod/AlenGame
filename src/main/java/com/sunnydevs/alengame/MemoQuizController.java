@@ -33,15 +33,7 @@ public class MemoQuizController extends Quiz{
 
     @FXML
     private void initialize() {
-        AnchorPane.setTopAnchor(innerAnchorPane, (outerAnchorPane.getHeight() - innerAnchorPane.getPrefHeight()) / 2);
-        AnchorPane.setLeftAnchor(innerAnchorPane, (outerAnchorPane.getWidth() - innerAnchorPane.getPrefWidth()) / 2);
-
-        // Bind layout constraints to outer AnchorPane's size changes
-        outerAnchorPane.heightProperty().addListener((observable, oldValue, newValue) ->
-                AnchorPane.setTopAnchor(innerAnchorPane, (newValue.doubleValue() - innerAnchorPane.getPrefHeight()) / 2));
-
-        outerAnchorPane.widthProperty().addListener((observable, oldValue, newValue) ->
-                AnchorPane.setLeftAnchor(innerAnchorPane, (newValue.doubleValue() - innerAnchorPane.getPrefWidth()) / 2));
+        super.setUpAnchorPaneConstraints(innerAnchorPane, outerAnchorPane);
 
         for (Node btn : btnsContainer.getChildren()) {
             btn.setOnMouseEntered(super::handleMouseEnter);

@@ -4,10 +4,12 @@ import com.sunnydevs.alengame.db.Person;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 
@@ -22,9 +24,17 @@ public class PhotoQuizController extends Quiz {
     private GridPane btnsContainer;
     @FXML
     private ImageView imgHolder;
+    @FXML
+    private AnchorPane innerAnchorPane, outerAnchorPane;
 
     @FXML
     private void initialize() {
+
+
+        for (Node btn : btnsContainer.getChildren()) {
+            btn.setOnMouseEntered(super::handleMouseEnter);
+            btn.setOnMouseExited(super::handleMouseExit);
+        }
         nextQuestion(null);
     }
 
@@ -42,18 +52,25 @@ public class PhotoQuizController extends Quiz {
             counter++;
             return;
         }
-
-        if (((Button) event.getSource()).getText() == questions.get(counter - 1).get("correct")) {
-            System.out.println(counter + "-> Correct");
-            correctQuestions.add(counter - 1);
-        } else {
-            System.out.println(counter + "-> Incorrect");
-            incorrectQuestions.add(counter - 1);
+        try {
+            if (((Button) event.getSource()).getText() == questions.get(counter - 1).get("correct")) {
+                ((Button) event.getSource()).setStyle("-fx-background-color: #dffbef; -fx-border-color: #2ca177");
+                Thread.sleep(500);
+                correctQuestions.add(counter - 1);
+            } else {
+                ((Button) event.getSource()).setStyle("-fx-background-color: #ffa6a6; -fx-border-color: #800000");
+                Thread.sleep(500);
+                incorrectQuestions.add(counter - 1);
+            }
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+            System.exit(1);
         }
+
         if (counter == NUM_OF_QUESTIONS) {
             System.out.println(correctQuestions);
             System.out.println(incorrectQuestions);
-            showResults(((Stage) ((Button) event.getSource()).getScene().getWindow()));
+            showResults(((Stage) ((Button) event.getSource()).getScene().getWindow()), correctQuestions.size());
             return;
         }
 

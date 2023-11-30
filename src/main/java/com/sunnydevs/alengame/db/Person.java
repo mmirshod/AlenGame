@@ -26,11 +26,11 @@ public final class Person extends GetConnection {
         this.groupId = groupId;
     }
 
-    public static void _new(String name, int userId, int age, Blob photo, String memo, int groupId) throws SQLException {
+    public static void _new(String name, int userId, int age, byte[] photo, String memo, int groupId) throws SQLException {
         PreparedStatement preparedStatement = conn.prepareStatement("INSERT INTO person (name, age, photo, memo, group_id, user_id) VALUES (?, ?, ?, ?, ?, ?)");
         preparedStatement.setString(1, name);
         preparedStatement.setInt(2, age);
-        preparedStatement.setBlob(3, photo);
+        preparedStatement.setBytes(3, photo);
         preparedStatement.setString(4, memo);
         preparedStatement.setInt(5, groupId);
         preparedStatement.setInt(6, userId);

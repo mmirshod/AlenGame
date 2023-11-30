@@ -3,6 +3,8 @@ CREATE SCHEMA public;
 
 CREATE TABLE users (
     id SERIAL PRIMARY KEY ,
+    username varchar(255) NOT NULL UNIQUE ,
+    password varchar(255) NOT NULL,
     first_name VARCHAR(255) NOT NULL ,
     last_name VARCHAR(255) ,
     age INT NOT NULL ,
@@ -59,3 +61,17 @@ CREATE OR REPLACE TRIGGER update_group_max_score
     AFTER INSERT OR UPDATE ON results
     FOR EACH ROW
     EXECUTE PROCEDURE update_group_max_score_func();
+
+
+CREATE OR REPLACE FUNCTION set_default_username()
+RETURNS TRIGGER AS $$
+BEGIN
+    NEW.username := concat(lower(NEW.first_name), lower(NEW.last_name), NEW.age);
+    RETURN NEW;
+end;
+$$ LANGUAGE plpgsql;
+
+CREATE OR REPLACE TRIGGER before_insert_trigger
+    BEFORE INSERT ON "AlenGame".public.users
+    FOR EACH ROW
+    EXECUTE FUNCTION set_default_username();

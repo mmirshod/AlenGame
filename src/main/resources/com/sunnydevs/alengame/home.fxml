@@ -4,23 +4,35 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane prefHeight="400.0" prefWidth="700.0" style="-fx-background-color: #2E3348;" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.sunnydevs.alengame.HomeController">
+<AnchorPane fx:id="outerAnchorPane" prefHeight="400.0" prefWidth="700.0" style="-fx-background-color: #2E3348;" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.sunnydevs.alengame.HomeController">
    <children>
-      <AnchorPane layoutY="110.0" prefHeight="306.0" prefWidth="700.0" style="-fx-background-color: #fafafa;">
+      <AnchorPane layoutY="33.0">
          <children>
-            <Button fx:id="home_play" layoutX="249.0" layoutY="79.0" mnemonicParsing="false" prefHeight="52.0" prefWidth="201.0" style="-fx-background-color: #F89344;" text="Play" textFill="#fcfafa">
+            <AnchorPane fx:id="innerAnchorPane" layoutY="59.0" prefHeight="324.0" prefWidth="700.0" style="-fx-background-color: #fafafa;">
+               <children>
+                  <Button fx:id="playBtn" layoutX="248.0" layoutY="40.0" mnemonicParsing="false" prefHeight="52.0" prefWidth="201.0" style="-fx-background-color: #F89344;" text="Memo Quiz" textFill="#fcfafa">
+                     <font>
+                        <Font name="Comic Sans MS" size="25.0" />
+                     </font>
+                  </Button>
+                  <Button fx:id="settingsBtn" layoutX="248.0" layoutY="184.0" mnemonicParsing="false" prefHeight="52.0" prefWidth="202.0" style="-fx-background-color: #2E3348;" text="Settings" textFill="#fcfafa">
+                     <font>
+                        <Font name="Comic Sans MS" size="25.0" />
+                     </font>
+                  </Button>
+                  <Button fx:id="playBtn1" layoutX="248.0" layoutY="112.0" mnemonicParsing="false" prefHeight="52.0" prefWidth="201.0" style="-fx-background-color: #F89344;" text="Photo Quiz" textFill="#fcfafa">
+                     <font>
+                        <Font name="Comic Sans MS" size="25.0" />
+                     </font>
+                  </Button>
+               </children>
+            </AnchorPane>
+            <Label alignment="CENTER" layoutX="256.0" text="AlenGame" textAlignment="CENTER" textFill="#fcfafa" textOverrun="CLIP">
                <font>
-                  <Font size="25.0" />
-               </font></Button>
-            <Button fx:id="home_settings" layoutX="248.0" layoutY="172.0" mnemonicParsing="false" prefHeight="52.0" prefWidth="202.0" style="-fx-background-color: #2E3348;" text="Settings" textFill="#fcfafa">
-               <font>
-                  <Font size="25.0" />
-               </font></Button>
-         </children></AnchorPane>
-      <Label fx:id="home_name_of_game" layoutX="263.0" layoutY="23.0" text="AlenGame" textFill="#fcfafa">
-         <font>
-            <Font name="System Bold" size="36.0" />
-         </font>
-      </Label>
+                  <Font name="JetBrains Mono ExtraBold" size="40.0" />
+               </font>
+            </Label>
+         </children>
+      </AnchorPane>
    </children>
 </AnchorPane>

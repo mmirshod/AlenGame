@@ -4,16 +4,14 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.paint.Color;
 import javafx.stage.Stage;
-import javafx.stage.StageStyle;
+
+import java.io.IOException;
 
 public class HomeController {
     @FXML
-    private Button playBtn;
-
+    private Button playBtn, playBtn1, settingsBtn;
     @FXML
     private void initialize() {
         playBtn.setOnAction(new EventHandler<>() {
@@ -21,15 +19,34 @@ public class HomeController {
             public void handle(ActionEvent actionEvent) {
                 try {
                     Stage thisStage = (Stage) ((Button) actionEvent.getSource()).getScene().getWindow();
-                    thisStage.close();
+                    FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("memo-quiz.fxml"));
+                    thisStage.getScene().setRoot(fxmlLoader.load());
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        });
 
+        playBtn1.setOnAction(new EventHandler<>() {
+            @Override
+            public void handle(ActionEvent actionEvent) {
+                try {
+                    Stage thisStage = (Stage) ((Button) actionEvent.getSource()).getScene().getWindow();
                     FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("photo-quiz.fxml"));
-                    Scene scene = new Scene(fxmlLoader.load());
-                    Stage stage = new Stage();
-                    stage.setScene(scene);
-                    stage.initStyle(StageStyle.TRANSPARENT);
-                    scene.setFill(Color.TRANSPARENT);
-                    stage.show();
+                    thisStage.getScene().setRoot(fxmlLoader.load());
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+
+        settingsBtn.setOnAction(new EventHandler<>() {
+            @Override
+            public void handle(ActionEvent actionEvent) {
+                try {
+                    Stage thisStage = (Stage) ((Button) actionEvent.getSource()).getScene().getWindow();
+                    FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("UserSettings.fxml"));
+                    thisStage.getScene().setRoot(fxmlLoader.load());
                 } catch (Exception e) {
                     e.printStackTrace();
                 }

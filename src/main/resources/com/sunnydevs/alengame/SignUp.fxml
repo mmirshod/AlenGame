@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<BorderPane prefHeight="716.0" prefWidth="840.0" style="-fx-background-color: fff;" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.sunnydevs.alengame.SignUpController">
+    <center>
+        <TextFlow layoutX="311.0" layoutY="100.0" prefHeight="431.0" prefWidth="745.0" textAlignment="CENTER"
+                  AnchorPane.bottomAnchor="4.0" AnchorPane.leftAnchor="311.0"
+                  AnchorPane.rightAnchor="309.79999999999995" AnchorPane.topAnchor="100.0">
+            <VBox prefHeight="282.0" prefWidth="265.0" spacing="10.0">
+                <padding>
+                    <Insets bottom="10.0" left="10.0" right="10.0" top="10.0"/>
+                </padding>
+                <Label prefHeight="36.0" prefWidth="148.0" text="First Name:">
+                    <font>
+                        <Font name="Comic Sans MS Italic" size="25.0"/>
+                    </font>
+                </Label>
+                <TextField fx:id="firstName" prefHeight="38.0" prefWidth="220.0">
+                    <font>
+                        <Font size="17.0"/>
+                    </font>
+                </TextField>
+                <Label layoutX="20.0" layoutY="20.0" prefHeight="36.0" prefWidth="148.0" text="Lasst Name:">
+                    <font>
+                        <Font name="Comic Sans MS Italic" size="25.0"/>
+                    </font>
+                </Label>
+                <TextField fx:id="lastName" layoutX="20.0" layoutY="66.0" prefHeight="38.0" prefWidth="220.0">
+                    <font>
+                        <Font size="17.0"/>
+                    </font>
+                </TextField>
+                <Label layoutX="20.0" layoutY="116.0" prefHeight="36.0" prefWidth="148.0" text="Age:">
+                    <font>
+                        <Font name="Comic Sans MS Italic" size="25.0"/>
+                    </font>
+                </Label>
+                <TextField fx:id="age" layoutX="20.0" layoutY="162.0" prefHeight="38.0" prefWidth="220.0">
+                    <font>
+                        <Font size="17.0"/>
+                    </font>
+                </TextField>
+                <Label layoutX="20.0" layoutY="209.0" prefHeight="36.0" prefWidth="148.0" text="Username:">
+                    <font>
+                        <Font name="Comic Sans MS Italic" size="25.0"/>
+                    </font>
+                </Label>
+                <TextField fx:id="username" editable="false" layoutX="20.0" layoutY="256.0" prefHeight="38.0"
+                           prefWidth="220.0">
+                    <font>
+                        <Font size="17.0"/>
+                    </font>
+                </TextField>
+                <Label layoutX="20.0" layoutY="209.0" prefHeight="36.0" prefWidth="148.0" text="Password:">
+                    <font>
+                        <Font name="Comic Sans MS Italic" size="25.0"/>
+                    </font>
+                </Label>
+                <PasswordField fx:id="password" layoutX="20.0" layoutY="256.0" prefHeight="38.0" prefWidth="220.0">
+                    <font>
+                        <Font size="17.0"/>
+                    </font>
+                </PasswordField>
+            </VBox>
+        </TextFlow>
+    </center>
+    <top>
+        <TextFlow style="-fx-background-color: #2E3348;" textAlignment="CENTER">
+            <padding>
+                <Insets bottom="20.0" left="20.0" right="20.0" top="20.0"/>
+            </padding>
+            <Label alignment="CENTER" prefHeight="54.0" prefWidth="242.0" text="Sign Up" textAlignment="CENTER"
+                   textFill="#fcfafa">
+                <font>
+                    <Font size="36.0"/>
+                </font>
+            </Label>
+        </TextFlow>
+    </top>
+    <bottom>
+        <TextFlow lineSpacing="10.0" style="-fx-background-color: fff;" textAlignment="CENTER">
+            <BorderPane.margin>
+                <Insets bottom="50.0"/>
+            </BorderPane.margin>
+            <Button fx:id="signInBtn" alignment="CENTER" layoutX="380.0" layoutY="10.0" mnemonicParsing="false"
+                    prefHeight="52.0" prefWidth="124.0"
+                    style="-fx-background-color: fff; -fx-border-radius: 30; -fx-border-color: #F89344;" text="Sign-in"
+                    textFill="#f89344">
+                <font>
+                    <Font size="25.0"/>
+                </font>
+            </Button>
+            <Label text="              "/>
+            <Button fx:id="signUpBtn" alignment="CENTER" mnemonicParsing="false" prefHeight="52.0" prefWidth="124.0"
+                    style="-fx-background-color: #b5c1ff; -fx-border-color: #6b76ad; -fx-border-radius: 30; -fx-border-width: 1.5; -fx-background-radius: 30;"
+                    text="Sign-up" textFill="#3000a9">
+                <font>
+                    <Font size="25.0"/>
+                </font>
+            </Button>
+        </TextFlow>
+    </bottom>
+</BorderPane>

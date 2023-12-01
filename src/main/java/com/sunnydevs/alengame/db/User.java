@@ -201,4 +201,7 @@ public class User extends GetConnection {
     public String password() {
         return password;
     }
+    public int id() {
+        return id.get();
+    }
 }

@@ -33,6 +33,11 @@
                   <Font size="17.0" />
                </font>
             </Button>
+            <Button fx:id="backBtn" layoutX="29.0" layoutY="207.0" mnemonicParsing="false" prefHeight="39.0" prefWidth="93.0" style="-fx-background-color: #F98344;" text="Back" textFill="#fcfafa">
+               <font>
+                  <Font size="17.0" />
+               </font>
+            </Button>
          </children></AnchorPane>
       <Label layoutX="255.0" layoutY="14.0" text="New Person" textFill="#fcfafa">
          <font>

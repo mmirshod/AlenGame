@@ -32,18 +32,16 @@ public final class Result extends GetConnection {
      * @param userId   The user ID associated with the result.
      * @param score    The score achieved in the quiz.
      * @param quizType The type of quiz.
-     * @param people   An array of person IDs associated with the result.
      * @throws SQLException If a database access error occurs.
      */
-    public static void _new(int groupId, int userId, int score, String quizType, int[] people) throws SQLException {
+    public static void _new(int groupId, int userId, int score, String quizType) throws SQLException {
         PreparedStatement preparedStatement = conn.prepareStatement(
-                "INSERT INTO results (group_id, played_time, score, quiz_type, people, user_id) VALUES (?, current_timestamp, ?, ?, ?, ?)"
+                "INSERT INTO results (group_id, user_id, played_time, score, quiz_type) VALUES (?, ?, current_timestamp, ?, ?)"
         );
         preparedStatement.setInt(1, groupId);
-        preparedStatement.setInt(2, score);
-        preparedStatement.setString(3, quizType);
-        Object[] values = Arrays.stream(people).boxed().toArray();
-        preparedStatement.setArray(4, conn.createArrayOf("int", values));
+        preparedStatement.setInt(2, userId);
+        preparedStatement.setInt(3, score);
+        preparedStatement.setString(4, quizType);
         preparedStatement.executeUpdate();
         preparedStatement.close();
     }

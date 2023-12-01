@@ -47,13 +47,13 @@ public abstract class Quiz {
      * @param stage    The primary stage of the application.
      * @param corrects The number of correct answers.
      */
-    protected void showResults(Stage stage, int corrects) {
+    protected void showResults(Stage stage, int corrects, String typer) {
         try {
             stage.close();
             FXMLLoader resultsView = new FXMLLoader(getClass().getResource("Result.fxml"));
             Scene resultsScene = new Scene(resultsView.load());
             ResultsController controller = resultsView.getController();
-            controller.setCorrectNum(corrects);
+            controller.setCorrectNum(corrects, typer);
 
             Stage resultsStage = new Stage();
             resultsStage.setScene(resultsScene);

@@ -1,5 +1,7 @@
 package com.sunnydevs.alengame;
 
+import com.sunnydevs.alengame.db.Result;
+import com.sunnydevs.alengame.db.User;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -10,6 +12,7 @@ import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.sql.SQLException;
 
 /**
  * Controller class for the quiz results view in the AlenGame application.
@@ -22,7 +25,7 @@ public class ResultsController {
     Text resText;
     @FXML
     ProgressIndicator incorrectProgress, correctProgress;
-
+    String quizTyper;
     /**
      * Initializes the results view based on the number of correct answers.
      */
@@ -47,11 +50,17 @@ public class ResultsController {
      *
      * @param corrects The number of correct answers.
      */
-    void setCorrectNum(int corrects) {
+    void setCorrectNum(int corrects, String type) {
         correctNum.setText(String.valueOf(corrects));
         incorrectNum.setText(String.valueOf(Quiz.NUM_OF_QUESTIONS - corrects));
         incorrectProgress.setProgress((double) (Quiz.NUM_OF_QUESTIONS - corrects) / 10);
         correctProgress.setProgress((double) corrects / 10);
+        quizTyper = type;
+        try {
+            Result._new(1, User.getUser(null).id(), corrects, quizTyper);
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     /**

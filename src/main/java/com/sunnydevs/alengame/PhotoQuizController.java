@@ -73,7 +73,7 @@ public class PhotoQuizController extends Quiz {
         if (counter == NUM_OF_QUESTIONS) {
             System.out.println(correctQuestions);
             System.out.println(incorrectQuestions);
-            showResults(((Stage) ((Button) event.getSource()).getScene().getWindow()), correctQuestions.size());
+            showResults(((Stage) ((Button) event.getSource()).getScene().getWindow()), correctQuestions.size(), "photo");
             return;
         }
 

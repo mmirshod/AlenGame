@@ -37,7 +37,7 @@ public class AddPeopleController {
     private Button selectImg;
 
     @FXML
-    private Button add;
+    private Button add, backBtn;
 
     private File selectedFile;
 
@@ -48,6 +48,15 @@ public class AddPeopleController {
     private void initialize() {
         selectImg.setOnAction(e -> handleSelectImage());
         add.setOnAction(e -> handleAdd());
+        backBtn.setOnAction(e -> {
+            Stage thisStage = (Stage) ((Button) e.getSource()).getScene().getWindow();
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("home.fxml"));
+            try {
+                thisStage.getScene().setRoot(fxmlLoader.load());
+            } catch (IOException ex) {
+                throw new RuntimeException(ex);
+            }
+        });
     }
 
     /**
